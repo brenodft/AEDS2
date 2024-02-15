@@ -36,6 +36,7 @@ void palindromo(char *ponteiro){
 		in += specialen;
 		tam -= specialen;
 	}		
+
 	in++;
 	tam--;
 	}while(in<tam);
@@ -44,6 +45,8 @@ void palindromo(char *ponteiro){
 	}else{
 		printf("NAO\n");
 	}
+
+	//printf("String: %s ",ponteiro);
 }
 
 int main(){
@@ -52,9 +55,9 @@ int lin = 0;
 int col = 0;
 int numstring = 0;
 do{
-entrada = (char**)realloc(entrada, (30* (numstring+1)) * sizeof(char*));
-entrada[numstring] = (char*)malloc(100);
-fgets(entrada[numstring], 100, stdin);
+entrada = (char**)realloc(entrada, (300* (numstring+1)) * sizeof(char*));
+entrada[numstring] = (char*)malloc(500);
+fgets(entrada[numstring], 500, stdin);
 palindromo(entrada[numstring]);
 numstring++;
 }while(endLine(entrada[numstring-1]) != 0 );
