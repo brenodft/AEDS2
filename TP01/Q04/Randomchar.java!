@@ -1,0 +1,34 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class Randomchar{
+	public static void main(String[] args){
+		Scanner sc = new Scanner(System.in);
+		String entrada = sc.nextLine();
+		System.out.println("String Trocada: "+sort(entrada));
+		sc.close();		
+	}
+	public static String sort(String entrada){
+		Random sortedNumber = new Random();
+		int sorted1 = sortedNumber.nextInt(26) + 97;
+		int sorted2 = sortedNumber.nextInt(26) + 97;
+		System.out.println("Sorted1: "+sorted1+" Sorted2: "+sorted2);
+		String sortedstring = "";
+// 'a'= 97 'z' = 122
+		for(int i = 0; i<entrada.length(); i++){
+			if((int)entrada.charAt(i) == sorted1){
+				sortedstring +=  (char)sorted2;
+			}else if((int)entrada.charAt(i) == sorted2){
+				sortedstring += (char)sorted1;
+			} else{
+				sortedstring += entrada.charAt(i);
+			}
+		}
+		return sortedstring;
+
+	}
+}
+
+
+
+
