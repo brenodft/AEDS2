@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Q05{
+public class Q14{
     public static String fix(String entrada){
         String aux = "";
         for(int i = 0; i<entrada.length(); i++){
@@ -67,24 +67,26 @@ public class Q05{
 	}
 
 
+
+
 	public static boolean check(String entrada){
-		entrada = fix(entrada); // acionando função para tratar a string de entrada
-	
-		while(entrada.contains("(")){ // chamando a função de algebra para cada subexpressão do parenteses
+		if(entrada.contains("(")){
 			int indiceFechamento = entrada.indexOf(')');
 			int indiceAbertura = entrada.lastIndexOf('(',indiceFechamento);	
-
 			String subExpr = entrada.substring(indiceAbertura - 1, indiceFechamento + 1);		
-					
+
 			String resul = algebra(subExpr);
 			entrada = entrada.substring(0,indiceAbertura-1) + resul + entrada.substring(indiceFechamento+1,entrada.length());		
-            //resolvendo a expressão booleana
+            //eliminando parentereses para calculo de algebra
+			return check(entrada); // chamada recursiva que ocorre enquanto os parenteses nao forem eliminados
 		}
-        //checando qual foi o booleano resultante e retornando-o
-		boolean checked = entrada.equals("1");										
-		return checked;	
-
+		else{
+			return entrada.equals("1");
+		}
+		
 	}
+
+
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
         while(true){
@@ -92,7 +94,7 @@ public class Q05{
         if (entrada.equals("0")){
             break;
         }
-        if(check(entrada)){ //Se a expressão booleana for true imprime 1, caso contrario imprime 0
+        if(check(fix(entrada))){ //Se a expressão booleana for true imprime 1, caso contrario imprime 0
             System.out.println(1);
         } else{
             System.out.println(0 );
