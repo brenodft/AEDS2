@@ -1,4 +1,4 @@
-//Algorítmo para remover números ímpares de uma Matriz Flexível
+//Algorítmo para remover números ímpares de uma Matriz Flexível de Listas
 public class RemoverImparesMatrixFlexivel {
     Celulamat y = inicio;
     while(y != null){
