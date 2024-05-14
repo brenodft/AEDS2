@@ -31,13 +31,13 @@ boolean pesquisaInterna(No i, String nome){
 }
 
 void inserir(String nome){
-    inserir(raiz,nome);
+    raiz = inserir(raiz,nome);
 }
 
 void inserir(No i, String nome){
     if(nome.charAt(0) == i.letra){
-        inserirArvoreInterna(i, nome);
-    } else if(nome.compareTo(i.letra) > 0){
+        i = inserirArvoreInterna(i, nome);
+    } else if(nome.charAt(0) > i.letra){
         inserir(i.dir, nome);
     } else{
         inserir(i.esq,nome);
@@ -93,7 +93,7 @@ boolean hasStringTam10(No i){
 }
 
 boolean hasStringTam10(char c){
-    boolean resp = hasStringTam10(c);
+    boolean resp = hasStringTam10(raiz,c);
 }
 
 boolean hasStringTam10(No i, char c){

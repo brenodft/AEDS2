@@ -113,7 +113,7 @@ class Agenda{
                 i.primeiro.prox = new Celula(contato);
                 i.primeiro.prox.prox = tmp;
             }
-        } else if(compararCaractere(contato.nome.charAt(0),i.letra)>0){
+        } else if(contato.nome.charAt(0)>i.letra){
             inserir(contato, i.dir);
         }else {
             inserir(contato, i.esq);
@@ -124,6 +124,25 @@ class Agenda{
     void pesquisar(String nome){
         System.out.println(pesquisar(raiz,nome));
     }
+    void pesquisar(int cpf){
+        System.out.println(pesquisar(raiz,cpf));
+    }
+    boolean pesquisar(No i, int cpf){
+        boolean resp = false;
+        if(i != null){
+            Celula p = i.primeiro;
+            for(;p!= null; p = p.prox){
+                if(p.contato.cpf == cpf){
+                    resp = true;
+                    break; }
+            }
+            if (!resp) { 
+                resp = pesquisar(i.esq, cpf) || pesquisar(i.dir,cpf);
+            }
+        }
+        return resp;
+    }
+
     boolean pesquisar(No i, String nome){
         boolean resp = false;
         if(i.letra == nome.charAt(0)){

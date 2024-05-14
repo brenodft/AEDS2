@@ -1,21 +1,29 @@
 class Celula{
     int elemento;
-    Celula primeiro,prox;
+    Celula primeiro,ultimo,prox;
 
     Celula(){
         elemento = 0;
-        primeiro = new Celula();
+        primeiro= ultimo = new Celula();
         prox = null;
     }
     Celula(int x){
         elemento = x;
-        primeiro = new Celula();
+        primeiro= ultimo = new Celula();
         prox = null;
+    }
+    void inserirFinal(int x){
+        Celula i = primeiro;
+        for(;i.prox != null; i = i.prox);
+        Celula tmp = new Celula(x);
+        i.prox = tmp;
+        ultimo = tmp;
+        tmp = null;
     }
 }
 
 class CelulaMat{
-    public Celula elemento;
+    public Celula lista;
     public CelulaMat dir;
     public CelulaMat esq;
     public CelulaMat sup;
@@ -23,14 +31,14 @@ class CelulaMat{
 
     
     public CelulaMat(){
-        this.elemento = new Celula();
+        this.lista = new Celula();
         this.dir = null;
         this.esq = null;
         this.sup = null;
         this.inf = null;
     }
     public CelulaMat(int x){
-        this.elemento = new Celula(x);
+        this.lista = new Celula(x);
         this.dir = null;
         this.esq = null;
         this.sup = null;
@@ -40,7 +48,6 @@ class CelulaMat{
 
 class MatrizFlexivel{
     private CelulaMat inicio;
-    Celula lista;
     private int linha,coluna;
     public MatrizFlexivel(){
         this(3,3);
@@ -81,11 +88,72 @@ class MatrizFlexivel{
         
     }
     boolean pesquisar(int elemento){
-        resp = pesquisar(inicio,elemento);;
+        return pesquisar(inicio,elemento);
     }
-    boolean pesquisar(Celulamat celmat, int elemento){
-        while(celmat != null){
-            celmat.lista.p
+    boolean pesquisar(CelulaMat celmat, int elemento){
+        boolean resp = false;
+        CelulaMat in = celmat.inf;
+        CelulaMat i = celmat;
+        while(in != null){
+            for(;i != null; i = i.dir){
+                if(percorrerPesquisar(celmat.lista, elemento)){
+                    resp = true;
+                }
+            }
+            i = in;
+            in = in.inf;
+        }
+        return resp;
+    }
+    boolean percorrerPesquisar(Celula i,int elemento){
+        boolean resp = false;
+        for(;i!= null; i=i.prox){
+            if(i.elemento == elemento){
+                resp = true;
+            }
+        }
+        return resp;
+    }
+    void percorrerPrintar(Celula i){
+        for(;i!= null; i=i.prox){
+            System.out.print(i.elemento+ " ");
+        }
+    }
+    boolean pesquisar(int i, int j, int elemento){
+        return pesquisar(inicio,i,j,elemento);
+    }
+    boolean pesquisar(CelulaMat cel,int i, int j, int elemento){
+        CelulaMat aux = cel;
+        for(int a = 0; a<i; a++){
+            aux = aux.dir;
+        }
+        for(int b = 0; b<j; b++){
+            aux = aux.inf;
+        }
+        return percorrerPesquisar(aux.lista, elemento);
+    }
+    void inserir(int i, int j, int elemento){
+        inserir(inicio,i,j,elemento);
+    }
+    void inserir(CelulaMat cel, int i, int j, int elemento){
+        CelulaMat aux = cel;
+        for(int a = 0; a<i; a++){
+            aux = aux.dir;
+        }
+        for(int b = 0; b<j; b++){
+            aux = aux.inf;
+        }
+        aux.lista.inserirFinal(elemento);
+    }
+    void mostrar(){
+        CelulaMat aux = inicio;
+        CelulaMat auxinf = aux.inf;
+        while(aux != null){
+            for(;aux != null; aux = aux.dir){
+                percorrerPrintar(aux.lista);
+            }
+            aux = auxinf;
+            auxinf = auxinf.inf;
         }
     }
 }
