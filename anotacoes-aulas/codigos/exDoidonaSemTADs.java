@@ -100,7 +100,10 @@ class Doidona{
     int hashT3(int elemento){
         return elemento%100;
     }
-
+    public int reh(int elemento) {
+        return ++elemento % 100;
+     }
+  
     void inserir(int x){
         if(t1[hashT1(x)] == -1){
             t1[hashT1(x)] = x;
@@ -108,7 +111,12 @@ class Doidona{
             if(t3[hashT3(x)] == -1){
                 t3[hashT3(x)] = x;
             } else{
-                no1.inserir(no1,x);
+                System.out.println("Rehash!");
+                if(t3[reh(x)] == -1){
+                    t3[reh(x)] = x;
+                }else{
+                    no1.inserir(no1,x);
+                }
             }
         } else if(hashT2(x) == 1){
             cel.inserir(cel, x);

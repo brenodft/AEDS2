@@ -694,6 +694,10 @@ class Doidona{
     int hashT2(int elemento){
         return elemento%3;
     }
+	public int reh(int elemento) {
+		return ++elemento % 100;
+	 }
+  
     void inserir(int elemento) throws Exception{
         if(t1[hashT1(elemento)] == -1){
             System.out.println("Sem conflito na T1!");
@@ -704,8 +708,14 @@ class Doidona{
                 System.out.println("Sem conflito na T3!");
                 t3[hashT3(elemento)] = elemento;
             } else{
-                System.out.println("Conflito na T3!Partindo para Arvore1");
-                arvore1.inserir(elemento);
+				System.out.println("Rehash!");
+				if(t3[reh(elemento)] == -1){
+					t3[reh(elemento)]=elemento;
+				}else{
+					System.out.println("Falha no rehash, partindo para a arvore!");
+					arvore1.inserir(elemento);
+				}
+
             }
         } else if(hashT2(elemento) == 1){
             System.out.println("Conflito na T1! Partindo para a Lista");
