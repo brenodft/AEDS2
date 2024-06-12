@@ -734,7 +734,10 @@ class Doidona{
         } else if(hashT2(elemento) == 0){
             if(t3[hashT3(elemento)] == elemento){
                 resp = true;
-            } else{
+            }else if(t3[hashT3(elemento)+1]) == elemento{
+		resp = true;
+	    }
+	    else{
                 resp = arvore1.pesquisar(elemento);
             }
         } else if(hashT2(elemento) == 1){
